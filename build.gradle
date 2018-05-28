@@ -31,6 +31,7 @@ dependencies {
 	compile 'com.h2database:h2:1.4.196'
 	compile 'com.google.guava:guava:23.0'
 	compile 'javax.inject:javax.inject:1'
+	compile 'org.springframework:spring-aspects:4.3.14.RELEASE'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile 'io.rest-assured:rest-assured:3.0.3'

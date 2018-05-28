@@ -6,6 +6,7 @@ import net.helpscout.playaway.stereotype.ReadingController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import javax.inject.Provider;
 
@@ -18,7 +19,7 @@ public class CustomerReadingController {
     private final CustomerQueries customerQueries;
 
     @GetMapping("/customers/{customerId}")
-    ResponseEntity<?> getCustomer(@PathVariable long customerId) {
+    public ResponseEntity<?> getCustomer(@PathVariable long customerId, @RequestHeader("CompanyID") long companyId) {
         return new PreconditionsAction()
                 .addPrecondition(customerPreconditionProvider.get().forCustomer(customerId))
                 .whenAllPreconditionsMatch(() -> ResponseEntity.ok(customerQueries.getCustomer(customerId)))

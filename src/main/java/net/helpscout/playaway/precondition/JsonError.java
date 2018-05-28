@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.PAYMENT_REQUIRED;
 
 @Value
 public class JsonError {
@@ -26,7 +27,7 @@ public class JsonError {
         return new JsonError(BAD_REQUEST.value(), "Bad-Request", message);
     }
 
-    public static JsonError conflict(String message) {
-        return new JsonError(CONFLICT.value(), "Conflict", message);
+    public static JsonError paymentRequired(String message) {
+        return new JsonError(PAYMENT_REQUIRED.value(), "Payment-Required", message);
     }
 }

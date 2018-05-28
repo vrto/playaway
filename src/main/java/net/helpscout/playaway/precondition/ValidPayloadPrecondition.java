@@ -3,10 +3,12 @@ package net.helpscout.playaway.precondition;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import net.helpscout.playaway.web.HttpContext;
+import net.helpscout.playaway.web.exception.InvalidJsonException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.validation.Validator;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -72,8 +74,11 @@ public class ValidPayloadPrecondition<T> implements Precondition {
     }
 
     // overridable if needed
-    @SneakyThrows
     protected T bindFromRequest(String body) {
-        return objectMapper.readValue(body, payloadType);
+        try {
+            return objectMapper.readValue(body, payloadType);
+        } catch (IOException e) {
+            throw new InvalidJsonException(e.getMessage());
+        }
     }
 }

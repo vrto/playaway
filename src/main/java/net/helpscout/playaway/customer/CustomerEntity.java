@@ -16,7 +16,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@NoArgsConstructor
 public class CustomerEntity {
 
     @Id
@@ -31,8 +30,7 @@ public class CustomerEntity {
     @Column(name = "last_name")
     String last;
 
-    public CustomerEntity(String first, String last) {
-        this.first = first;
-        this.last = last;
-    }
+    @Column(name = "age")
+    int age;
+
 }

@@ -29,7 +29,11 @@ public class HappyPathTests extends FunctionalTest {
 	public void readingControllerReturnsDataFromSlave() {
 		// master script is empty, so if any data is returned it must have used slave
 
-		get("/customers/1").then()
+		given()
+			.header("CompanyID", 1)
+		.when()
+			.get("/customers/1")
+		.then()
 			.statusCode(200)
 			.body("id", equalTo(1))
 			.body("first", equalTo("The"))
@@ -42,11 +46,13 @@ public class HappyPathTests extends FunctionalTest {
 
 	    given()
 			.contentType(ContentType.JSON)
+			.header("CompanyID", 1)
 			.body(ImmutableMap.of("first", "New", "last", "Custie"))
 		.when()
 			.post("/customers")
 		.then()
-			.statusCode(201);
+			.statusCode(201)
+			.header("Location", "www.the-internet.com");
 
 		assertThat(customerRepository.findAll().size()).isEqualTo(1);
 	}

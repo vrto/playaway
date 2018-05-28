@@ -45,46 +45,12 @@ public class PreconditionResult {
         return new PreconditionResult(BAD_REQUEST, JsonError.badRequest("Payload invalid")); // errors translation omitted for this demo
     }
 
-//    public static PreconditionResult badRequestDetailed(List<FieldError> errors) {
-//        return new PreconditionResult(BAD_REQUEST, DetailedJsonError.ofBadRequest(errors));
-//    }
-
-//    public static <T> PreconditionResult badRequestDetailed(Set<ConstraintViolation<T>> errors) {
-//        return new PreconditionResult(BAD_REQUEST, DetailedJsonError.ofBadRequest(errors));
-//    }
-
     public static PreconditionResult badRequest(String message) {
         return new PreconditionResult(BAD_REQUEST, JsonError.badRequest(message), message);
     }
 
-//    public static PreconditionResult badRequestWithCustomMessage(String field, String message, ErrorMessageFormat format) {
-//        ResponseError jsonError = format == ErrorMessageFormat.SIMPLE
-//                ? JsonError.ofBadRequest(message)
-//                : detailedFieldError(field, message);
-//
-//        return new PreconditionResult(BAD_REQUEST, jsonError, message);
-//    }
-
-//    public static PreconditionResult badRequestWithCustomMessage(String field, ValidationCode validationCode, ErrorMessageFormat format) {
-//        ResponseError jsonError = format == ErrorMessageFormat.SIMPLE
-//                ? JsonError.ofBadRequest(field + " - " + validationCode.getLabel())
-//                : detailedFieldError(field, validationCode);
-//
-//        return new PreconditionResult(BAD_REQUEST, jsonError, validationCode.getLabel());
-//    }
-
     public boolean isFailed() {
         return violationStatus != null;
     }
-
-    //TODO cleanup
-
-//    public boolean hasPayload() {
-//        return violationPayload != null;
-//    }
-
-//    public int getViolationCode() {
-//        return violationStatus.value();
-//    }
 
 }
