@@ -3,6 +3,7 @@ package net.helpscout.playaway;
 import com.google.common.collect.ImmutableMap;
 import lombok.val;
 import net.helpscout.playaway.data.DbContextHolder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -36,16 +37,18 @@ public class AppConfig {
     }
 
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource(@Value("${db.master.script}") String masterScriptName,
+                                 @Value("${db.slave.script}") String slaveScriptName) {
+
         val master = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("customers-master.sql")
+                .addScript(masterScriptName)
                 .setName("master")
                 .build();
 
         val slave = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("customers-slave.sql")
+                .addScript(slaveScriptName)
                 .setName("slave")
                 .build();
 

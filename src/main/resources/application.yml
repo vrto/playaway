@@ -1,0 +1,4 @@
+spring.mvc.throw-exception-if-no-handler-found: true
+db:
+  master.script: customers-master.sql
+  slave.script: customers-slave.sql
